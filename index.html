@@ -1,623 +1,623 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radio Paz y Vida - Transmisión Continua</title>
-    <!-- Bootstrap 5 CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet">
-    <!-- FontAwesome para Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #0d233a;
-            --secondary-color: #1b4965;
-            --accent-gold: #d4af37;
-            --light-bg: #f8f9fa;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--light-bg);
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        h1,
-        h2,
-        h3,
-        .navbar-brand,
-        .card-title {
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Sidebar Estilo */
-        #sidebar {
-            min-height: 100vh;
-            background: linear-gradient(180deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-
-        #sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-            margin-bottom: 8px;
-            transition: all 0.3s ease;
-        }
-
-        #sidebar .nav-link:hover,
-        #sidebar .nav-link.active {
-            background-color: var(--accent-gold);
-            color: var(--primary-color);
-            font-weight: 600;
-            transform: translateX(5px);
-        }
-
-        /* Versículos Dinámicos */
-        .verse-container {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            border-left: 5px solid var(--accent-gold);
-            min-height: 110px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .fade-text {
-            animation: fadeInOut 5s infinite;
-        }
-
-        @keyframes fadeInOut {
-            0% {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            15% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            85% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Radio Player Destacado */
-        .radio-hero-card {
-            background: linear-gradient(135deg, #112233 0%, #1f3a5f 100%);
-            border: 2px solid var(--accent-gold);
-            border-radius: 15px;
-            color: white;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-        }
-
-        /* Indicador en vivo pulso */
-        .pulse-badge {
-            animation: pulse-animation 2s infinite;
-        }
-
-        @keyframes pulse-animation {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            50% {
-                transform: scale(1.08);
-                opacity: 0.7;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* Vúmetro / Ondas de sonido simuladas */
-        .sound-wave {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            height: 30px;
-        }
-
-        .sound-wave span {
-            display: block;
-            width: 4px;
-            background-color: var(--accent-gold);
-            border-radius: 2px;
-            animation: wave 1.2s infinite ease-in-out;
-        }
-
-        .sound-wave span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .sound-wave span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        .sound-wave span:nth-child(4) {
-            animation-delay: 0.6s;
-        }
-
-        .sound-wave span:nth-child(5) {
-            animation-delay: 0.8s;
-        }
-
-        @keyframes wave {
-
-            0%,
-            100% {
-                height: 8px;
-            }
-
-            50% {
-                height: 28px;
-            }
-        }
-
-        /* Carrusel de la Biblia */
-        .bible-carousel-container {
-            border-radius: 18px;
-            overflow: hidden;
-            background-color: #0d1e2e;
-            border: 2px solid rgba(212, 175, 55, 0.35);
-        }
-
-        .bible-carousel-img {
-            height: 520px;
-            width: 100%;
-            object-fit: cover;
-            object-position: center;
-            filter: brightness(0.92);
-        }
-
-        @media (max-width: 768px) {
-            .bible-carousel-img {
-                height: 360px;
-            }
-        }
-
-        .bible-caption-box {
-            background: linear-gradient(180deg, rgba(13, 35, 58, 0.75) 0%, rgba(10, 20, 35, 0.95) 100%);
-            backdrop-filter: blur(8px);
-            border-radius: 14px;
-            border: 1px solid rgba(212, 175, 55, 0.45);
-            padding: 14px 24px;
-            max-width: 720px;
-            margin: 0 auto 10px auto;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-        }
-
-        .carousel-indicators [data-bs-target] {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid var(--accent-gold);
-            margin: 0 4px;
-        }
-
-        .carousel-indicators .active {
-            background-color: var(--accent-gold);
-            width: 28px;
-            border-radius: 6px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar Izquierdo -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block p-3 collapse">
-                <div class="text-center py-4">
-                    <i class="fa-solid fa-cross text-warning fa-2x mb-2"></i>
-                    <h4 class="text-white mb-0">Radio Paz y Vida</h4>
-                    <small class="text-warning">Señal del Cielo</small>
-                </div>
-                <hr class="text-secondary">
-                <ul class="nav flex-column" id="mainMenu">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html"><i class="fa-solid fa-house me-2"></i> Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="radial.html">
-                            <i class="fa-solid fa-microphone-lines me-2 text-warning"></i> Mi Programa Radial
-                            <span class="badge bg-danger ms-auto pulse-badge" style="font-size: 0.65rem;">En Vivo</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="mt-auto pt-5 text-center text-white-50 small">
-                    <p class="mb-0">&copy; 2026 Radio Paz y Vida</p>
-                    <small>Ministerio Radial Cristiano</small>
-                </div>
-            </nav>
-
-            <!-- Contenido Principal -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-
-                <!-- Botón para mostrar menú en móviles -->
-                <button class="btn btn-dark d-md-none mb-3" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#sidebar">
-                    <i class="fa-solid fa-bars"></i> Menú
-                </button>
-
-                <!-- SECCIÓN 1: Versículos Bíblicos Dinámicos -->
-                <section id="inicio" class="mb-4">
-                    <div class="verse-container p-4 text-center">
-                        <div>
-                            <span class="badge bg-warning text-dark mb-2 fw-bold">Palabra de Vida</span>
-                            <h5 id="bible-verse" class="mb-0 px-3 fade-text fst-italic">"Jehová es mi pastor; nada me
-                                faltará." – Salmos 23:1</h5>
-                        </div>
-                    </div>
-                </section>
-
-
-                <!-- SECCIÓN 2: Énfasis Especial en la Radio Web -->
-                <section id="radio" class="mb-5">
-                    <div class="card radio-hero-card p-4 p-md-5">
-                        <div class="row align-items-center">
-                            <div class="col-lg-7 mb-4 mb-lg-0">
-                                <div class="d-flex align-items-center mb-3">
-                                    <span class="badge bg-danger pulse-badge px-3 py-2 me-3 fs-6">
-                                        <i class="fa-solid fa-signal me-1"></i> EN VIVO
-                                    </span>
-                                    <span class="text-warning small"><i class="fa-solid fa-headphones me-1"></i>
-                                        Transmisión 24/7 Digital</span>
-                                </div>
-                                <h2 class="display-6 fw-bold mb-3">Radio Paz y Vida – Señal en Directo</h2>
-                                <p class="text-light mb-4">Disfruta de alabanzas continuas, prédicas edificantes y
-                                    momentos de reflexión para fortalecer tu espíritu dondequiera que estés.</p>
-
-                                <!-- Controles de Audio Interactivos -->
-                                <div
-                                    class="d-flex flex-wrap align-items-center gap-3 bg-dark bg-opacity-50 p-3 rounded-pill border border-secondary">
-                                    <button id="playBtn"
-                                        class="btn btn-warning rounded-circle p-3 d-flex align-items-center justify-content-center shadow"
-                                        style="width: 55px; height: 55px;">
-                                        <i id="playIcon" class="fa-solid fa-play fa-lg text-dark"></i>
-                                    </button>
-                                    <div>
-                                        <span id="streamStatus" class="d-block fw-semibold text-warning">Reproducir
-                                            Transmisión</span>
-                                        <small id="currentSong" class="text-white-50">Alabanza: "Cerca de Ti" - Grupo
-                                            Inspiración</small>
-                                    </div>
-                                    <div class="ms-auto d-flex align-items-center gap-2">
-                                        <i class="fa-solid fa-volume-high text-warning"></i>
-                                        <input type="range" id="volumeControl" class="form-range" min="0" max="1"
-                                            step="0.05" value="0.8" style="width: 90px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 text-center">
-                                <div
-                                    class="bg-black bg-opacity-40 p-4 rounded-4 border border-secondary d-inline-block w-100">
-                                    <div class="mb-3">
-                                        <i class="fa-solid fa-radio text-warning fa-3x mb-2"></i>
-                                        <h5 class="text-white">Frecuencia Online</h5>
-                                    </div>
-                                    <div class="sound-wave justify-content-center mb-3">
-                                        <span></span><span></span><span></span><span></span><span></span><span></span>
-                                    </div>
-                                    <div class="badge bg-secondary text-light px-3 py-2">Calidad HD - 128 kbps AAC</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Etiqueta de audio oculta con stream de ejemplo -->
-                        <audio id="radioAudio" preload="none">
-                            <source src="https://icecast.gnome.org/stream/ogg" type="audio/ogg">
-                            Tu navegador no soporta el elemento de audio.
-                        </audio>
-                    </div>
-                </section>
-
-                <!-- SECCIÓN 3: Carrusel de Imágenes de la Santa Biblia (10 Imágenes) -->
-                <section id="carrusel-biblia" class="mb-5">
-                    <div class="d-flex flex-wrap align-items-center justify-content-between mb-4 gap-2">
-                        <div>
-                            <h3 class="fw-bold mb-1 text-primary-emphasis"><i
-                                    class="fa-solid fa-book-bible text-warning me-2"></i> Galería de la Santa Biblia
-                            </h3>
-                            <p class="text-muted mb-0">Colección visual de las Sagradas Escrituras a través de la
-                                historia</p>
-                        </div>
-                        <span class="badge bg-warning text-dark px-3 py-2 fw-bold fs-6 shadow-sm"><i
-                                class="fa-regular fa-images me-1"></i> 10 Imágenes</span>
-                    </div>
-
-                    <div class="bible-carousel-container shadow-lg">
-                        <div id="bibleCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
-                            data-bs-interval="4500">
-                            <!-- Indicadores (10) -->
-                            <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="0"
-                                    class="active" aria-current="true" aria-label="Imagen 1"></button>
-                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="1"
-                                    aria-label="Imagen 2"></button>
-                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="2"
-                                    aria-label="Imagen 3"></button>
-                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="3"
-                                    aria-label="Imagen 4"></button>
-                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="4"
-                                    aria-label="Imagen 5"></button>
-                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="5"
-                                    aria-label="Imagen 6"></button>
-                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="6"
-                                    aria-label="Imagen 7"></button>
-                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="7"
-                                    aria-label="Imagen 8"></button>
-                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="8"
-                                    aria-label="Imagen 9"></button>
-                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="9"
-                                    aria-label="Imagen 10"></button>
-                            </div>
-
-                            <!-- Slides (10 Imágenes) -->
-                            <div class="carousel-inner">
-                                <!-- 1 -->
-                                <div class="carousel-item active">
-                                    <img src="images/biblia/biblia_1.jpg" class="d-block bible-carousel-img"
-                                        alt="Biblia de Gutenberg - Lenox Copy">
-                                    <div class="carousel-caption">
-                                        <div class="bible-caption-box">
-                                            <h4 class="fw-bold text-warning mb-1">1. La Santa Biblia de Gutenberg</h4>
-                                            <p class="mb-0 text-light small fst-italic">"La hierba se seca, y la flor se
-                                                marchita; mas la palabra del Dios nuestro permanece para siempre." –
-                                                Isaías 40:8</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 2 -->
-                                <div class="carousel-item">
-                                    <img src="images/biblia/biblia_2.jpg" class="d-block bible-carousel-img"
-                                        alt="Libro de Salmos y Oración">
-                                    <div class="carousel-caption">
-                                        <div class="bible-caption-box">
-                                            <h4 class="fw-bold text-warning mb-1">2. Libro de Salmos y Oración</h4>
-                                            <p class="mb-0 text-light small fst-italic">"Lámpara es a mis pies tu
-                                                palabra, y lumbrera a mi camino." – Salmos 119:105</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 3 -->
-                                <div class="carousel-item">
-                                    <img src="images/biblia/biblia_3.jpg" class="d-block bible-carousel-img"
-                                        alt="Grabado Bíblico Clásico">
-                                    <div class="carousel-caption">
-                                        <div class="bible-caption-box">
-                                            <h4 class="fw-bold text-warning mb-1">3. Ilustraciones Bíblicas Clásicas
-                                            </h4>
-                                            <p class="mb-0 text-light small fst-italic">"Porque la palabra de Dios es
-                                                viva y eficaz, y más cortante que toda espada de dos filos." – Hebreos
-                                                4:12</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 4 -->
-                                <div class="carousel-item">
-                                    <img src="images/biblia/biblia_4.jpg" class="d-block bible-carousel-img"
-                                        alt="Enseñanza Bíblica">
-                                    <div class="carousel-caption">
-                                        <div class="bible-caption-box">
-                                            <h4 class="fw-bold text-warning mb-1">4. Enseñanzas del Maestro</h4>
-                                            <p class="mb-0 text-light small fst-italic">"Yo soy el camino, y la verdad,
-                                                y la vida; nadie viene al Padre, sino por mí." – Juan 14:6</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 5 -->
-                                <div class="carousel-item">
-                                    <img src="images/biblia/biblia_5.jpg" class="d-block bible-carousel-img"
-                                        alt="Códice Sinaítico">
-                                    <div class="carousel-caption">
-                                        <div class="bible-caption-box">
-                                            <h4 class="fw-bold text-warning mb-1">5. Códice Sinaítico Manuscrito</h4>
-                                            <p class="mb-0 text-light small fst-italic">"Toda la Escritura es inspirada
-                                                por Dios y útil para enseñar y redargüir." – 2 Timoteo 3:16</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 6 -->
-                                <div class="carousel-item">
-                                    <img src="images/biblia/biblia_6.jpg" class="d-block bible-carousel-img"
-                                        alt="Biblia Sacra Mazarinea">
-                                    <div class="carousel-caption">
-                                        <div class="bible-caption-box">
-                                            <h4 class="fw-bold text-warning mb-1">6. Biblia Sacra Mazarinea</h4>
-                                            <p class="mb-0 text-light small fst-italic">"En el principio era el Verbo, y
-                                                el Verbo era con Dios, y el Verbo era Dios." – Juan 1:1</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 7 -->
-                                <div class="carousel-item">
-                                    <img src="images/biblia/biblia_7.jpg" class="d-block bible-carousel-img"
-                                        alt="Devocional y Sagradas Escrituras">
-                                    <div class="carousel-caption">
-                                        <div class="bible-caption-box">
-                                            <h4 class="fw-bold text-warning mb-1">7. Devoción en las Escrituras</h4>
-                                            <p class="mb-0 text-light small fst-italic">"Bienaventurado el varón que en
-                                                la ley de Jehová está su delicia." – Salmos 1:2</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 8 -->
-                                <div class="carousel-item">
-                                    <img src="images/biblia/biblia_8.jpg" class="d-block bible-carousel-img"
-                                        alt="Relatos del Libro de Génesis">
-                                    <div class="carousel-caption">
-                                        <div class="bible-caption-box">
-                                            <h4 class="fw-bold text-warning mb-1">8. Relatos del Libro de Génesis</h4>
-                                            <p class="mb-0 text-light small fst-italic">"En el principio creó Dios los
-                                                cielos y la tierra." – Génesis 1:1</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 9 -->
-                                <div class="carousel-item">
-                                    <img src="images/biblia/biblia_9.jpg" class="d-block bible-carousel-img"
-                                        alt="Promesas y Alianzas Divinas">
-                                    <div class="carousel-caption">
-                                        <div class="bible-caption-box">
-                                            <h4 class="fw-bold text-warning mb-1">9. Promesas y Alianzas Divinas</h4>
-                                            <p class="mb-0 text-light small fst-italic">"El Señor es fiel a todas sus
-                                                promesas y bondadoso en todo lo que hace." – Salmos 145:13</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 10 -->
-                                <div class="carousel-item">
-                                    <img src="images/biblia/biblia_10.jpg" class="d-block bible-carousel-img"
-                                        alt="El Legado Eterno de la Palabra">
-                                    <div class="carousel-caption">
-                                        <div class="bible-caption-box">
-                                            <h4 class="fw-bold text-warning mb-1">10. El Legado Eterno de la Palabra
-                                            </h4>
-                                            <p class="mb-0 text-light small fst-italic">"El cielo y la tierra pasarán,
-                                                pero mis palabras no pasarán." – Mateo 24:35</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Controles Anterior / Siguiente -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#bibleCarousel"
-                                data-bs-slide="prev">
-                                <span
-                                    class="carousel-control-prev-icon p-3 bg-dark bg-opacity-75 rounded-circle border border-warning"
-                                    aria-hidden="true"></span>
-                                <span class="visually-hidden">Anterior</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#bibleCarousel"
-                                data-bs-slide="next">
-                                <span
-                                    class="carousel-control-next-icon p-3 bg-dark bg-opacity-75 rounded-circle border border-warning"
-                                    aria-hidden="true"></span>
-                                <span class="visually-hidden">Siguiente</span>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-            </main>
-        </div>
-    </div>
-
-    <!-- Bootstrap 5 JS Bundle CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        // ==========================================
-        // 1. VERSÍCULOS BÍBLICOS DINÁMICOS (Carga desde JSON)
-        // ==========================================
-        let bibleVerses = [
-            "\"Jehová es mi pastor; nada me faltará.\" – Salmos 23:1",
-            "\"Todo lo puedo en Cristo que me fortalece.\" – Filipenses 4:13",
-            "\"Confía en el Señor con todo tu corazón, y no te apoyes en tu propia prudencia.\" – Proverbios 3:5",
-            "\"Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo dondequiera que vayas.\" – Josué 1:9",
-            "\"Porque yo sé muy bien los planes que tengo para ustedes, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.\" – Jeremías 29:11",
-            "\"El Señor es mi luz y mi salvación; ¿a quién temeré? El Señor es el baluarte de mi vida; ¿de quién he de atemorizarme?\" – Salmos 27:1",
-            "\"Vengan a mí todos ustedes que están cansados y agobiados, y yo les daré descanso.\" – Mateo 11:28",
-            "\"La paz les dejo, mi paz les doy; yo no se la doy como el mundo la da. No se turbe su corazón ni tenga miedo.\" – Juan 14:27",
-            "\"Pero los que confían en el Señor renovarán sus fuerzas; volarán como las águilas; correrán y no se fatigarán, caminarán y no se cansarán.\" – Isaías 40:31",
-            "\"Lámpara es a mis pies tu palabra, y lumbrera a mi camino.\" – Salmos 119:105"
-        ];
-
-        let currentVerseIndex = 1;
-        const verseElement = document.getElementById("bible-verse");
-
-        // Intentar cargar las frases desde data/frases.json
-        fetch('data/frases.json')
-            .then(response => {
-                if (!response.ok) throw new Error('No se pudo cargar data/frases.json');
-                return response.json();
-            })
-            .then(data => {
-                if (Array.isArray(data) && data.length > 0) {
-                    bibleVerses = data.map(item => {
-                        if (typeof item === 'string') return item;
-                        return `"${item.frase}" – ${item.referencia}`;
-                    });
-                    currentVerseIndex = 1;
-                    verseElement.textContent = bibleVerses[0];
-                }
-            })
-            .catch(err => {
-                console.info('Usando versículos iniciales:', err.message);
-            });
-
-        function rotateVerse() {
-            if (!bibleVerses.length) return;
-            // Reiniciar animación quitando y volviendo a agregar la clase
-            verseElement.style.animation = 'none';
-            verseElement.offsetHeight; // Trigger reflow
-            verseElement.style.animation = 'fadeInOut 5s infinite';
-
-            verseElement.textContent = bibleVerses[currentVerseIndex];
-            currentVerseIndex = (currentVerseIndex + 1) % bibleVerses.length;
-        }
-
-        // Cambiar cada 5 segundos
-        setInterval(rotateVerse, 5000);
-
-
-
-        // ==========================================
-        // 3. REPRODUCTOR DE RADIO WEB (Interactividad)
-        // ==========================================
-        const audio = document.getElementById("radioAudio");
-        const playBtn = document.getElementById("playBtn");
-        const playIcon = document.getElementById("playIcon");
-        const streamStatus = document.getElementById("streamStatus");
-        const volumeControl = document.getElementById("volumeControl");
-
-        let isPlaying = false;
-
-        playBtn.addEventListener("click", () => {
-            if (!isPlaying) {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    playIcon.className = "fa-solid fa-pause fa-lg text-dark";
-                    streamStatus.textContent = "Reproduciendo en Vivo...";
-                }).catch(e => {
-                    alert("Haga clic para iniciar la señal de audio o verifique la conexión del stream.");
-                });
-            } else {
-                audio.pause();
-                isPlaying = false;
-                playIcon.className = "fa-solid fa-play fa-lg text-dark";
-                streamStatus.textContent = "Transmisión en Pausa";
-            }
-        });
-
-        volumeControl.addEventListener("input", (e) => {
-            audio.volume = e.target.value;
-        });
-    </script>
-
-</body>
-
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Paz y Vida - Transmisión Continua</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0d233a;
+            --secondary-color: #1b4965;
+            --accent-gold: #d4af37;
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .navbar-brand,
+        .card-title {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Sidebar Estilo */
+        #sidebar {
+            min-height: 100vh;
+            background: linear-gradient(180deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        #sidebar .nav-link:hover,
+        #sidebar .nav-link.active {
+            background-color: var(--accent-gold);
+            color: var(--primary-color);
+            font-weight: 600;
+            transform: translateX(5px);
+        }
+
+        /* Versículos Dinámicos */
+        .verse-container {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-left: 5px solid var(--accent-gold);
+            min-height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fade-text {
+            animation: fadeInOut 10s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            8% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            92% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Radio Player Destacado */
+        .radio-hero-card {
+            background: linear-gradient(135deg, #112233 0%, #1f3a5f 100%);
+            border: 2px solid var(--accent-gold);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Indicador en vivo pulso */
+        .pulse-badge {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Vúmetro / Ondas de sonido simuladas */
+        .sound-wave {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 30px;
+        }
+
+        .sound-wave span {
+            display: block;
+            width: 4px;
+            background-color: var(--accent-gold);
+            border-radius: 2px;
+            animation: wave 1.2s infinite ease-in-out;
+        }
+
+        .sound-wave span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .sound-wave span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .sound-wave span:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .sound-wave span:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                height: 8px;
+            }
+
+            50% {
+                height: 28px;
+            }
+        }
+
+        /* Carrusel de la Biblia */
+        .bible-carousel-container {
+            border-radius: 18px;
+            overflow: hidden;
+            background-color: #0d1e2e;
+            border: 2px solid rgba(212, 175, 55, 0.35);
+        }
+
+        .bible-carousel-img {
+            height: 520px;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.92);
+        }
+
+        @media (max-width: 768px) {
+            .bible-carousel-img {
+                height: 360px;
+            }
+        }
+
+        .bible-caption-box {
+            background: linear-gradient(180deg, rgba(13, 35, 58, 0.75) 0%, rgba(10, 20, 35, 0.95) 100%);
+            backdrop-filter: blur(8px);
+            border-radius: 14px;
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            padding: 14px 24px;
+            max-width: 720px;
+            margin: 0 auto 10px auto;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .carousel-indicators [data-bs-target] {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--accent-gold);
+            margin: 0 4px;
+        }
+
+        .carousel-indicators .active {
+            background-color: var(--accent-gold);
+            width: 28px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar Izquierdo -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block p-3 collapse">
+                <div class="text-center py-4">
+                    <i class="fa-solid fa-cross text-warning fa-2x mb-2"></i>
+                    <h4 class="text-white mb-0">Radio Paz y Vida</h4>
+                    <small class="text-warning">Señal del Cielo</small>
+                </div>
+                <hr class="text-secondary">
+                <ul class="nav flex-column" id="mainMenu">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html"><i class="fa-solid fa-house me-2"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="radial.html">
+                            <i class="fa-solid fa-microphone-lines me-2 text-warning"></i> Mi Programa Radial
+                            <span class="badge bg-danger ms-auto pulse-badge" style="font-size: 0.65rem;">En Vivo</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mt-auto pt-5 text-center text-white-50 small">
+                    <p class="mb-0">&copy; 2026 Radio Paz y Vida</p>
+                    <small>Ministerio Radial Cristiano</small>
+                </div>
+            </nav>
+
+            <!-- Contenido Principal -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+
+                <!-- Botón para mostrar menú en móviles -->
+                <button class="btn btn-dark d-md-none mb-3" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#sidebar">
+                    <i class="fa-solid fa-bars"></i> Menú
+                </button>
+
+                <!-- SECCIÓN 1: Versículos Bíblicos Dinámicos -->
+                <section id="inicio" class="mb-4">
+                    <div class="verse-container p-4 text-center">
+                        <div>
+                            <span class="badge bg-warning text-dark mb-2 fw-bold">Palabra de Vida</span>
+                            <h5 id="bible-verse" class="mb-0 px-3 fade-text fst-italic">"Jehová es mi pastor; nada me
+                                faltará." – Salmos 23:1</h5>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- SECCIÓN 2: Énfasis Especial en la Radio Web -->
+                <section id="radio" class="mb-5">
+                    <div class="card radio-hero-card p-4 p-md-5">
+                        <div class="row align-items-center">
+                            <div class="col-lg-7 mb-4 mb-lg-0">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-danger pulse-badge px-3 py-2 me-3 fs-6">
+                                        <i class="fa-solid fa-signal me-1"></i> EN VIVO
+                                    </span>
+                                    <span class="text-warning small"><i class="fa-solid fa-headphones me-1"></i>
+                                        Transmisión 24/7 Digital</span>
+                                </div>
+                                <h2 class="display-6 fw-bold mb-3">Radio Paz y Vida – Señal en Directo</h2>
+                                <p class="text-light mb-4">Disfruta de alabanzas continuas, prédicas edificantes y
+                                    momentos de reflexión para fortalecer tu espíritu dondequiera que estés.</p>
+
+                                <!-- Controles de Audio Interactivos -->
+                                <div
+                                    class="d-flex flex-wrap align-items-center gap-3 bg-dark bg-opacity-50 p-3 rounded-pill border border-secondary">
+                                    <button id="playBtn"
+                                        class="btn btn-warning rounded-circle p-3 d-flex align-items-center justify-content-center shadow"
+                                        style="width: 55px; height: 55px;">
+                                        <i id="playIcon" class="fa-solid fa-play fa-lg text-dark"></i>
+                                    </button>
+                                    <div>
+                                        <span id="streamStatus" class="d-block fw-semibold text-warning">Reproducir
+                                            Transmisión</span>
+                                        <small id="currentSong" class="text-white-50">Alabanza: "Cerca de Ti" - Grupo
+                                            Inspiración</small>
+                                    </div>
+                                    <div class="ms-auto d-flex align-items-center gap-2">
+                                        <i class="fa-solid fa-volume-high text-warning"></i>
+                                        <input type="range" id="volumeControl" class="form-range" min="0" max="1"
+                                            step="0.05" value="0.8" style="width: 90px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 text-center">
+                                <div
+                                    class="bg-black bg-opacity-40 p-4 rounded-4 border border-secondary d-inline-block w-100">
+                                    <div class="mb-3">
+                                        <i class="fa-solid fa-radio text-warning fa-3x mb-2"></i>
+                                        <h5 class="text-white">Frecuencia Online</h5>
+                                    </div>
+                                    <div class="sound-wave justify-content-center mb-3">
+                                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="badge bg-secondary text-light px-3 py-2">Calidad HD - 128 kbps AAC</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Etiqueta de audio oculta con stream de ejemplo -->
+                        <audio id="radioAudio" preload="none">
+                            <source src="https://icecast.gnome.org/stream/ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3: Carrusel de Imágenes de la Santa Biblia (10 Imágenes) -->
+                <section id="carrusel-biblia" class="mb-5">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between mb-4 gap-2">
+                        <div>
+                            <h3 class="fw-bold mb-1 text-primary-emphasis"><i
+                                    class="fa-solid fa-book-bible text-warning me-2"></i> Galería de la Santa Biblia
+                            </h3>
+                            <p class="text-muted mb-0">Colección visual de las Sagradas Escrituras a través de la
+                                historia</p>
+                        </div>
+                        <span class="badge bg-warning text-dark px-3 py-2 fw-bold fs-6 shadow-sm"><i
+                                class="fa-regular fa-images me-1"></i> 10 Imágenes</span>
+                    </div>
+
+                    <div class="bible-carousel-container shadow-lg">
+                        <div id="bibleCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                            data-bs-interval="4500">
+                            <!-- Indicadores (10) -->
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Imagen 1"></button>
+                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="1"
+                                    aria-label="Imagen 2"></button>
+                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="2"
+                                    aria-label="Imagen 3"></button>
+                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="3"
+                                    aria-label="Imagen 4"></button>
+                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="4"
+                                    aria-label="Imagen 5"></button>
+                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="5"
+                                    aria-label="Imagen 6"></button>
+                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="6"
+                                    aria-label="Imagen 7"></button>
+                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="7"
+                                    aria-label="Imagen 8"></button>
+                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="8"
+                                    aria-label="Imagen 9"></button>
+                                <button type="button" data-bs-target="#bibleCarousel" data-bs-slide-to="9"
+                                    aria-label="Imagen 10"></button>
+                            </div>
+
+                            <!-- Slides (10 Imágenes) -->
+                            <div class="carousel-inner">
+                                <!-- 1 -->
+                                <div class="carousel-item active">
+                                    <img src="images/biblia/biblia_1.jpg" class="d-block bible-carousel-img"
+                                        alt="Biblia de Gutenberg - Lenox Copy">
+                                    <div class="carousel-caption">
+                                        <div class="bible-caption-box">
+                                            <h4 class="fw-bold text-warning mb-1">1. La Santa Biblia de Gutenberg</h4>
+                                            <p class="mb-0 text-light small fst-italic">"La hierba se seca, y la flor se
+                                                marchita; mas la palabra del Dios nuestro permanece para siempre." –
+                                                Isaías 40:8</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 2 -->
+                                <div class="carousel-item">
+                                    <img src="images/biblia/biblia_2.jpg" class="d-block bible-carousel-img"
+                                        alt="Libro de Salmos y Oración">
+                                    <div class="carousel-caption">
+                                        <div class="bible-caption-box">
+                                            <h4 class="fw-bold text-warning mb-1">2. Libro de Salmos y Oración</h4>
+                                            <p class="mb-0 text-light small fst-italic">"Lámpara es a mis pies tu
+                                                palabra, y lumbrera a mi camino." – Salmos 119:105</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 3 -->
+                                <div class="carousel-item">
+                                    <img src="images/biblia/biblia_3.jpg" class="d-block bible-carousel-img"
+                                        alt="Grabado Bíblico Clásico">
+                                    <div class="carousel-caption">
+                                        <div class="bible-caption-box">
+                                            <h4 class="fw-bold text-warning mb-1">3. Ilustraciones Bíblicas Clásicas
+                                            </h4>
+                                            <p class="mb-0 text-light small fst-italic">"Porque la palabra de Dios es
+                                                viva y eficaz, y más cortante que toda espada de dos filos." – Hebreos
+                                                4:12</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 4 -->
+                                <div class="carousel-item">
+                                    <img src="images/biblia/biblia_4.jpg" class="d-block bible-carousel-img"
+                                        alt="Enseñanza Bíblica">
+                                    <div class="carousel-caption">
+                                        <div class="bible-caption-box">
+                                            <h4 class="fw-bold text-warning mb-1">4. Enseñanzas del Maestro</h4>
+                                            <p class="mb-0 text-light small fst-italic">"Yo soy el camino, y la verdad,
+                                                y la vida; nadie viene al Padre, sino por mí." – Juan 14:6</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 5 -->
+                                <div class="carousel-item">
+                                    <img src="images/biblia/biblia_5.jpg" class="d-block bible-carousel-img"
+                                        alt="Códice Sinaítico">
+                                    <div class="carousel-caption">
+                                        <div class="bible-caption-box">
+                                            <h4 class="fw-bold text-warning mb-1">5. Códice Sinaítico Manuscrito</h4>
+                                            <p class="mb-0 text-light small fst-italic">"Toda la Escritura es inspirada
+                                                por Dios y útil para enseñar y redargüir." – 2 Timoteo 3:16</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 6 -->
+                                <div class="carousel-item">
+                                    <img src="images/biblia/biblia_6.jpg" class="d-block bible-carousel-img"
+                                        alt="Biblia Sacra Mazarinea">
+                                    <div class="carousel-caption">
+                                        <div class="bible-caption-box">
+                                            <h4 class="fw-bold text-warning mb-1">6. Biblia Sacra Mazarinea</h4>
+                                            <p class="mb-0 text-light small fst-italic">"En el principio era el Verbo, y
+                                                el Verbo era con Dios, y el Verbo era Dios." – Juan 1:1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 7 -->
+                                <div class="carousel-item">
+                                    <img src="images/biblia/biblia_7.jpg" class="d-block bible-carousel-img"
+                                        alt="Devocional y Sagradas Escrituras">
+                                    <div class="carousel-caption">
+                                        <div class="bible-caption-box">
+                                            <h4 class="fw-bold text-warning mb-1">7. Devoción en las Escrituras</h4>
+                                            <p class="mb-0 text-light small fst-italic">"Bienaventurado el varón que en
+                                                la ley de Jehová está su delicia." – Salmos 1:2</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 8 -->
+                                <div class="carousel-item">
+                                    <img src="images/biblia/biblia_8.jpg" class="d-block bible-carousel-img"
+                                        alt="Relatos del Libro de Génesis">
+                                    <div class="carousel-caption">
+                                        <div class="bible-caption-box">
+                                            <h4 class="fw-bold text-warning mb-1">8. Relatos del Libro de Génesis</h4>
+                                            <p class="mb-0 text-light small fst-italic">"En el principio creó Dios los
+                                                cielos y la tierra." – Génesis 1:1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 9 -->
+                                <div class="carousel-item">
+                                    <img src="images/biblia/biblia_9.jpg" class="d-block bible-carousel-img"
+                                        alt="Promesas y Alianzas Divinas">
+                                    <div class="carousel-caption">
+                                        <div class="bible-caption-box">
+                                            <h4 class="fw-bold text-warning mb-1">9. Promesas y Alianzas Divinas</h4>
+                                            <p class="mb-0 text-light small fst-italic">"El Señor es fiel a todas sus
+                                                promesas y bondadoso en todo lo que hace." – Salmos 145:13</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 10 -->
+                                <div class="carousel-item">
+                                    <img src="images/biblia/biblia_10.jpg" class="d-block bible-carousel-img"
+                                        alt="El Legado Eterno de la Palabra">
+                                    <div class="carousel-caption">
+                                        <div class="bible-caption-box">
+                                            <h4 class="fw-bold text-warning mb-1">10. El Legado Eterno de la Palabra
+                                            </h4>
+                                            <p class="mb-0 text-light small fst-italic">"El cielo y la tierra pasarán,
+                                                pero mis palabras no pasarán." – Mateo 24:35</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Controles Anterior / Siguiente -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#bibleCarousel"
+                                data-bs-slide="prev">
+                                <span
+                                    class="carousel-control-prev-icon p-3 bg-dark bg-opacity-75 rounded-circle border border-warning"
+                                    aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#bibleCarousel"
+                                data-bs-slide="next">
+                                <span
+                                    class="carousel-control-next-icon p-3 bg-dark bg-opacity-75 rounded-circle border border-warning"
+                                    aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ==========================================
+        // 1. VERSÍCULOS BÍBLICOS DINÁMICOS (Carga desde JSON)
+        // ==========================================
+        let bibleVerses = [
+            "\"Jehová es mi pastor; nada me faltará.\" – Salmos 23:1",
+            "\"Todo lo puedo en Cristo que me fortalece.\" – Filipenses 4:13",
+            "\"Confía en el Señor con todo tu corazón, y no te apoyes en tu propia prudencia.\" – Proverbios 3:5",
+            "\"Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo dondequiera que vayas.\" – Josué 1:9",
+            "\"Porque yo sé muy bien los planes que tengo para ustedes, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.\" – Jeremías 29:11",
+            "\"El Señor es mi luz y mi salvación; ¿a quién temeré? El Señor es el baluarte de mi vida; ¿de quién he de atemorizarme?\" – Salmos 27:1",
+            "\"Vengan a mí todos ustedes que están cansados y agobiados, y yo les daré descanso.\" – Mateo 11:28",
+            "\"La paz les dejo, mi paz les doy; yo no se la doy como el mundo la da. No se turbe su corazón ni tenga miedo.\" – Juan 14:27",
+            "\"Pero los que confían en el Señor renovarán sus fuerzas; volarán como las águilas; correrán y no se fatigarán, caminarán y no se cansarán.\" – Isaías 40:31",
+            "\"Lámpara es a mis pies tu palabra, y lumbrera a mi camino.\" – Salmos 119:105"
+        ];
+
+        let currentVerseIndex = 1;
+        const verseElement = document.getElementById("bible-verse");
+
+        // Intentar cargar las frases desde data/frases.json
+        fetch('data/frases.json')
+            .then(response => {
+                if (!response.ok) throw new Error('No se pudo cargar data/frases.json');
+                return response.json();
+            })
+            .then(data => {
+                if (Array.isArray(data) && data.length > 0) {
+                    bibleVerses = data.map(item => {
+                        if (typeof item === 'string') return item;
+                        return `"${item.frase}" – ${item.referencia}`;
+                    });
+                    currentVerseIndex = 1;
+                    verseElement.textContent = bibleVerses[0];
+                }
+            })
+            .catch(err => {
+                console.info('Usando versículos iniciales:', err.message);
+            });
+
+        function rotateVerse() {
+            if (!bibleVerses.length) return;
+            // Reiniciar animación quitando y volviendo a agregar la clase
+            verseElement.style.animation = 'none';
+            verseElement.offsetHeight; // Trigger reflow
+            verseElement.style.animation = 'fadeInOut 10s infinite';
+
+            verseElement.textContent = bibleVerses[currentVerseIndex];
+            currentVerseIndex = (currentVerseIndex + 1) % bibleVerses.length;
+        }
+
+        // Cambiar cada 10 segundos (5 segundos adicionales)
+        setInterval(rotateVerse, 10000);
+
+
+
+        // ==========================================
+        // 3. REPRODUCTOR DE RADIO WEB (Interactividad)
+        // ==========================================
+        const audio = document.getElementById("radioAudio");
+        const playBtn = document.getElementById("playBtn");
+        const playIcon = document.getElementById("playIcon");
+        const streamStatus = document.getElementById("streamStatus");
+        const volumeControl = document.getElementById("volumeControl");
+
+        let isPlaying = false;
+
+        playBtn.addEventListener("click", () => {
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    playIcon.className = "fa-solid fa-pause fa-lg text-dark";
+                    streamStatus.textContent = "Reproduciendo en Vivo...";
+                }).catch(e => {
+                    alert("Haga clic para iniciar la señal de audio o verifique la conexión del stream.");
+                });
+            } else {
+                audio.pause();
+                isPlaying = false;
+                playIcon.className = "fa-solid fa-play fa-lg text-dark";
+                streamStatus.textContent = "Transmisión en Pausa";
+            }
+        });
+
+        volumeControl.addEventListener("input", (e) => {
+            audio.volume = e.target.value;
+        });
+    </script>
+
+</body>
+
 </html>
