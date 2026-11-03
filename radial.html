@@ -352,117 +352,281 @@
 
 
 
-        /* Pastor Bio Card */
+        /* Pastor Bio Card - Resaltada con Efectos y Alto Contraste */
+        @keyframes card-gold-pulse {
+            0% {
+                box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.25);
+                border-color: #d4af37;
+            }
+            50% {
+                box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 215, 0, 0.5);
+                border-color: #ffd700;
+            }
+            100% {
+                box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.25);
+                border-color: #d4af37;
+            }
+        }
+
+        @keyframes avatar-gold-glow {
+            0% {
+                box-shadow: 0 0 18px rgba(255, 215, 0, 0.5);
+                border-color: #ffd700;
+            }
+            100% {
+                box-shadow: 0 0 32px rgba(255, 215, 0, 0.9), 0 0 12px #ffffff;
+                border-color: #ffffff;
+            }
+        }
+
+        @keyframes circle-neon-pulse {
+            0% {
+                box-shadow: 0 0 18px rgba(255, 71, 87, 0.45), inset 0 0 12px rgba(255, 71, 87, 0.2);
+                border-color: #ff4757;
+            }
+            100% {
+                box-shadow: 0 0 35px rgba(255, 71, 87, 0.85), 0 0 14px #ff6b81, inset 0 0 20px rgba(255, 71, 87, 0.45);
+                border-color: #ff6b81;
+            }
+        }
+
+        @keyframes countdown-glow-pulse {
+            0% {
+                box-shadow: 0 0 16px rgba(255, 215, 0, 0.35);
+                border-color: #ffd700;
+            }
+            50% {
+                box-shadow: 0 0 28px rgba(255, 215, 0, 0.65), 0 0 10px rgba(255, 234, 167, 0.4);
+                border-color: #ffeaa7;
+            }
+            100% {
+                box-shadow: 0 0 16px rgba(255, 215, 0, 0.35);
+                border-color: #ffd700;
+            }
+        }
 
         .pastor-profile-card {
-
-            background: rgba(255, 255, 255, 0.08);
-
-            backdrop-filter: blur(10px);
-
-            border: 1px solid rgba(212, 175, 55, 0.35);
-
-            border-radius: 16px;
-
-            padding: 22px;
-
-            transition: all 0.3s ease;
-
+            background: linear-gradient(145deg, #091f35 0%, #123356 100%);
+            border: 2px solid #ffd700;
+            border-radius: 22px;
+            padding: 24px;
+            transition: all 0.35s ease;
+            animation: card-gold-pulse 5s infinite ease-in-out;
+            position: relative;
+            overflow: hidden;
         }
-
-
 
         .pastor-profile-card:hover {
-
-            border-color: var(--accent-gold);
-
-            transform: translateY(-3px);
-
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-
+            transform: translateY(-5px) scale(1.01);
+            border-color: #ffeaa7;
         }
-
-
 
         .pastor-img-container {
-
-            width: 120px;
-
-            height: 120px;
-
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-
-            border: 3px solid var(--accent-gold);
-
+            border: 3.5px solid #ffd700;
             overflow: hidden;
-
             flex-shrink: 0;
-
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-
+            animation: avatar-gold-glow 2.8s infinite alternate ease-in-out;
+            transition: transform 0.3s ease;
         }
 
-
+        .pastor-img-container:hover {
+            transform: scale(1.05);
+        }
 
         .pastor-img-container img {
-
             width: 100%;
-
             height: 100%;
-
             object-fit: cover;
-
             object-position: top center;
-
         }
 
+        .pastor-badge-title {
+            background: linear-gradient(135deg, #ffd700 0%, #ff9f1a 100%);
+            color: #0b1a2b !important;
+            font-weight: 800;
+            font-size: 0.74rem;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 14px rgba(255, 165, 0, 0.45);
+            padding: 4px 10px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
 
+        .pastor-name-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.7), 0 0 20px rgba(255,255,255,0.25);
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
 
-        /* Widget de Horario y En Vivo */
+        .pastor-role-title {
+            color: #ffd23f !important;
+            font-weight: 700;
+            font-size: 0.90rem;
+            line-height: 1.25;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            letter-spacing: 0.2px;
+        }
 
+        .pastor-subrole {
+            color: #f8fafc !important;
+            font-size: 0.80rem;
+            line-height: 1.25;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            opacity: 1 !important;
+        }
+
+        .pastor-quote-highlight {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%);
+            border-left: 5px solid #ffd700;
+            border-top: 1px solid rgba(255, 215, 0, 0.35);
+            border-right: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 14px;
+            padding: 12px 16px;
+            margin-top: 14px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 0 15px rgba(212, 175, 55, 0.12);
+            backdrop-filter: blur(8px);
+        }
+
+        .pastor-quote-highlight p {
+            color: #ffffff !important;
+            font-style: italic;
+            font-size: 0.90rem;
+            font-weight: 500;
+            line-height: 1.5;
+            margin: 0;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+        }
+
+        /* Widget de Horario y En Vivo - Resaltado con Efectos */
         .schedule-badge-box {
-
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(13, 35, 58, 0.5) 100%);
-
-            border: 1px solid rgba(212, 175, 55, 0.4);
-
-            border-radius: 16px;
-
-            padding: 20px;
-
+            background: linear-gradient(145deg, #071728 0%, #0f2846 100%);
+            border: 2px solid #ffd700;
+            border-radius: 22px;
+            padding: 20px 18px;
+            transition: all 0.35s ease;
+            animation: card-gold-pulse 5s infinite ease-in-out 2.5s;
+            position: relative;
+            overflow: hidden;
         }
 
-
+        .schedule-badge-box:hover {
+            transform: translateY(-5px) scale(1.01);
+            border-color: #ffeaa7;
+        }
 
         .time-circle {
-
-            width: 92px;
-
-            height: 92px;
-
+            width: 118px;
+            height: 118px;
             border-radius: 50%;
-
-            border: 3px solid #ff5252;
-
-            background: rgba(255, 255, 255, 0.08);
-
+            border: 4px solid #ff4757;
+            background: radial-gradient(circle, rgba(255, 71, 87, 0.32) 0%, rgba(13, 35, 58, 0.9) 100%);
             display: flex;
-
             flex-direction: column;
-
             align-items: center;
-
             justify-content: center;
-
             text-align: center;
-
-            padding: 4px;
-
-            box-shadow: 0 4px 12px rgba(255, 82, 82, 0.2);
-
+            padding: 6px 4px;
+            animation: circle-neon-pulse 2.4s infinite alternate ease-in-out;
+            transition: transform 0.3s ease;
         }
 
+        .time-circle:hover {
+            transform: scale(1.08) rotate(2deg);
+        }
 
+        .time-circle-label {
+            color: #ffd700;
+            font-weight: 900;
+            font-size: 0.70rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            margin-bottom: 2px;
+        }
+
+        .time-circle-sub {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.82rem;
+            line-height: 1.15;
+            margin-bottom: 2px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+
+        .time-circle-main {
+            color: #ffffff;
+            background: linear-gradient(135deg, #ff7675 0%, #ff4757 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            font-size: 1.05rem;
+            filter: drop-shadow(0 0 10px rgba(255, 71, 87, 0.8));
+            line-height: 1.15;
+        }
+
+        .countdown-pill-highlight {
+            background: linear-gradient(135deg, #181303 0%, #2f2305 50%, #181303 100%) !important;
+            border: 2px solid #ffd700 !important;
+            animation: countdown-glow-pulse 3s infinite ease-in-out !important;
+            color: #ffe066 !important;
+            font-size: 0.86rem !important;
+            font-weight: 700 !important;
+            padding: 10px 14px !important;
+            border-radius: 14px !important;
+            display: block !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            white-space: normal !important;
+            line-height: 1.35 !important;
+            text-align: center;
+        }
+
+        .countdown-time-digits {
+            color: #ffffff !important;
+            font-size: 0.95rem !important;
+            font-weight: 900 !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6) !important;
+        }
+
+        .countdown-sub-schedule {
+            color: #ffd700 !important;
+            font-size: 0.78rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.4px !important;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7) !important;
+            opacity: 1 !important;
+        }
+
+        .countdown-pill-live {
+            background: linear-gradient(90deg, #b71524 0%, #e82c3f 50%, #b71524 100%) !important;
+            border: 2.5px solid #ff6b81 !important;
+            box-shadow: 0 0 30px rgba(255, 71, 87, 0.85) !important;
+            color: #ffffff !important;
+            font-size: 0.94rem !important;
+            font-weight: 900 !important;
+            padding: 10px 14px !important;
+            border-radius: 14px !important;
+            display: block !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            white-space: normal !important;
+            line-height: 1.35 !important;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
 
         /* ESPACIO PARA STREAMING DE RADIO */
 
@@ -828,6 +992,23 @@
 
         }
 
+    
+        /* Fecha y Hora en Vivo en Tiempo Real */
+        .live-datetime-badge {
+            position: relative;
+            z-index: 2;
+        }
+
+        .live-datetime-badge .d-inline-flex {
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .live-datetime-badge .d-inline-flex:hover {
+            border-color: #ffd700 !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 215, 0, 0.4);
+        }
     </style>
 
 </head>
@@ -986,11 +1167,27 @@
 
                             <div class="col-xl-8 col-lg-7 mb-4 mb-lg-0">
 
+                                <!-- Fecha y Hora en Español en Vivo (Espacio Superior) -->
+                                <div class="live-datetime-badge mb-3">
+                                    <div class="d-inline-flex flex-wrap align-items-center gap-2 px-3 py-2 rounded-pill bg-black bg-opacity-50 border border-warning border-opacity-75 shadow">
+                                        <span class="text-warning fw-bold small d-inline-flex align-items-center">
+                                            <i class="fa-solid fa-circle text-danger fa-2xs pulse-badge me-2"></i>
+                                            <i class="fa-regular fa-calendar-days text-warning me-1"></i>
+                                            <span id="headerLiveDate" class="text-white">Cargando fecha...</span>
+                                        </span>
+                                        <span class="text-warning opacity-75 d-none d-sm-inline">|</span>
+                                        <span class="text-warning fw-bold small d-inline-flex align-items-center">
+                                            <i class="fa-regular fa-clock text-warning me-1 fa-spin-pulse" style="--fa-animation-duration: 2s;"></i>
+                                            <span id="headerLiveTime" class="font-monospace text-warning fw-bold" style="letter-spacing: 1px;">--:--:--</span>
+                                        </span>
+                                    </div>
+                                </div>
+
                                 <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
 
                                     <span class="badge-radio-station">
 
-                                        <i class="fa-solid fa-broadcast-tower text-warning"></i>
+                                        <i class="fa-solid fa-tower-broadcast text-warning me-1"></i>
 
                                         Radio PODER &bull; "Un poder diferente"
 
@@ -1084,112 +1281,62 @@
 
 
 
-                            <!-- Tarjeta Lateral del Conductor y Horario -->
-
+                            <!-- Tarjeta Lateral del Conductor y Horario (Resaltada con Efectos) -->
                             <div class="col-xl-4 col-lg-5">
-
                                 <!-- Conductor Ps. Dago -->
-
                                 <div class="pastor-profile-card mb-3">
-
                                     <div class="d-flex align-items-center gap-3">
-
                                         <div class="pastor-img-container">
-
                                             <img src="images/ps_dago.jpg" alt="Ps. Dago - Conductor del Programa">
-
                                         </div>
-
                                         <div>
-
-                                            <span class="badge bg-warning text-dark fw-bold mb-1">Conducción &
-
-                                                Consejería</span>
-
-                                            <h4 class="text-white mb-0">Ps. Dago</h4>
-
-                                            <small class="text-warning d-block">Pastor & Terapeuta Familiar</small>
-
-                                            <small class="text-white-50" style="font-size: 0.78rem;">Orientación Bíblica
-
-                                                y Psicológica</small>
-
+                                            <span class="pastor-badge-title mb-1">
+                                                <i class="fa-solid fa-microphone-lines me-1"></i> Conducción &amp; Consejería
+                                            </span>
+                                            <h3 class="pastor-name-heading mb-0 mt-1">Ps. Dago</h3>
+                                            <span class="pastor-role-title d-block">
+                                                Pastor &amp; Terapeuta Familiar
+                                            </span>
+                                            <span class="pastor-subrole d-block">
+                                                Orientación Bíblica y Psicológica
+                                            </span>
                                         </div>
-
                                     </div>
-
-                                    <hr class="border-secondary my-3">
-
-                                    <p class="small text-light mb-0 fst-italic">
-
-                                        "Un consultorio bíblico psicológico para que usted pueda aprender sobre el
-
-                                        manejo espiritual y mental de la vida diaria."
-
-                                    </p>
-
+                                    <div class="pastor-quote-highlight">
+                                        <p>
+                                            <i class="fa-solid fa-quote-left text-warning fa-lg me-2"></i>"Un consultorio bíblico psicológico para que usted pueda aprender sobre el manejo espiritual y mental de la vida diaria."
+                                        </p>
+                                    </div>
                                 </div>
-
-
 
                                 <!-- Horario de Transmisión -->
-
                                 <div class="schedule-badge-box text-center">
-
-                                    <div class="d-flex align-items-center justify-content-center gap-3 mb-2">
-
+                                    <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
                                         <div class="time-circle">
-
-                                            <span class="text-warning small fw-bold">DÍA</span>
-
-                                            <span class="text-white fw-bold" style="font-size: 0.85rem;">Todos
-
-                                                los</span>
-
-                                            <span class="text-danger fw-bold"
-
-                                                style="font-size: 0.88rem;">Miércoles</span>
-
+                                            <span class="time-circle-label">DÍA</span>
+                                            <span class="time-circle-sub">Todos los</span>
+                                            <span class="time-circle-main">Miércoles</span>
                                         </div>
-
                                         <div class="time-circle">
-
-                                            <span class="text-warning small fw-bold">HORA</span>
-
-                                            <span class="text-white fw-bold" style="font-size: 0.85rem;">De 5 a 6</span>
-
-                                            <span class="text-danger fw-bold" style="font-size: 0.95rem;">p.m.</span>
-
+                                            <span class="time-circle-label">HORA</span>
+                                            <span class="time-circle-sub">De 5 a 6</span>
+                                            <span class="time-circle-main">p.m.</span>
                                         </div>
-
                                     </div>
 
-
-
-                                    <!-- Estado en Vivo / Countdown Dinámico -->
-
-                                    <div id="liveScheduleStatus" class="mt-2">
-
-                                        <span class="badge bg-secondary text-light px-3 py-2 w-100" id="countdownLabel">
-
-                                            <i class="fa-regular fa-clock me-1"></i> Calculando próxima emisión...
-
-                                        </span>
-
+                                    <!-- Estado en Vivo / Countdown Dinámico Resaltado -->
+                                    <div id="liveScheduleStatus">
+                                        <div class="countdown-pill-highlight" id="countdownLabel">
+                                            <div><i class="fa-regular fa-clock me-1 text-warning fa-spin-pulse"></i> Próxima Emisión: <strong class="countdown-time-digits">Calculando...</strong></div>
+                                            <small class="countdown-sub-schedule d-block mt-1">(Miércoles de 5:00 a 6:00 PM)</small>
+                                        </div>
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
 
-
-
                     <!-- ============================================================ -->
-
                     <!-- ESPACIO DEDICADO: REPRODUCTOR DE STREAMING DE RADIO          -->
 
                     <!-- ============================================================ -->
@@ -2107,73 +2254,39 @@
         // ==========================================
 
         function updateScheduleStatus() {
-
             const now = new Date();
-
             const currentDay = now.getDay(); // 0: Dom, 1: Lun, 2: Mar, 3: Mié, 4: Jue, 5: Vie, 6: Sáb
-
             const currentHour = now.getHours();
-
             const countdownLabel = document.getElementById("countdownLabel");
 
-
-
             // Miércoles es el día 3. Horario: 17:00 a 17:59
-
             if (currentDay === 3 && currentHour >= 17 && currentHour < 18) {
-
-                countdownLabel.className = "badge bg-danger pulse-badge text-white px-3 py-2 w-100 fs-6 shadow";
-
-                countdownLabel.innerHTML = '<i class="fa-solid fa-broadcast-tower fa-beat me-1"></i> ¡AL AIRE EN ESTE MOMENTO! (5:00 a 6:00 PM)';
-
+                countdownLabel.className = "countdown-pill-live pulse-badge shadow";
+                countdownLabel.innerHTML = '<div><i class="fa-solid fa-tower-broadcast fa-beat me-2"></i> ¡AL AIRE EN ESTE MOMENTO!</div><small class="d-block mt-1 text-white opacity-90 fw-bold" style="font-size:0.86rem;">(Transmisión en Vivo: 5:00 a 6:00 PM)</small>';
             } else {
-
                 // Calcular fecha del próximo miércoles a las 17:00:00
-
                 let daysUntilWednesday = (3 - currentDay + 7) % 7;
-
                 if (daysUntilWednesday === 0 && currentHour >= 18) {
-
                     daysUntilWednesday = 7;
-
                 }
-
-
 
                 const targetWednesday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + daysUntilWednesday, 17, 0, 0);
-
                 const diffMs = targetWednesday - now;
 
-
-
                 if (diffMs > 0) {
-
                     const totalHours = Math.floor(diffMs / (1000 * 60 * 60));
-
                     const days = Math.floor(totalHours / 24);
-
                     const hours = totalHours % 24;
-
                     const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
 
-
-
-                    countdownLabel.className = "badge bg-dark border border-warning text-warning px-3 py-2 w-100";
-
-                    countdownLabel.innerHTML = `<i class="fa-regular fa-clock me-1"></i> Próxima Emisión: en ${days}d ${hours}h ${minutes}m (Miércoles 5 PM)`;
-
+                    countdownLabel.className = "countdown-pill-highlight";
+                    countdownLabel.innerHTML = `<div><i class="fa-regular fa-clock me-1 text-warning fa-beat-fade"></i> Próxima Emisión: <strong class="countdown-time-digits">en ${days}d ${hours}h ${minutes}m</strong></div><small class="countdown-sub-schedule d-block mt-1">(Miércoles de 5:00 a 6:00 PM)</small>`;
                 } else {
-
-                    countdownLabel.className = "badge bg-secondary text-light px-3 py-2 w-100";
-
-                    countdownLabel.innerHTML = '<i class="fa-solid fa-calendar-check me-1"></i> Próximo Miércoles de 5 a 6 PM';
-
+                    countdownLabel.className = "countdown-pill-highlight";
+                    countdownLabel.innerHTML = '<div><i class="fa-solid fa-calendar-check me-1 text-warning"></i> Próximo Miércoles de 5 a 6 PM</div><small class="countdown-sub-schedule d-block mt-1">(Emisión Semanal en Directo)</small>';
                 }
-
             }
-
         }
-
         updateScheduleStatus();
 
         setInterval(updateScheduleStatus, 60000);
@@ -2551,10 +2664,32 @@
 
         });
 
-    </script>
-
-
-
+    
+    // ==========================================
+    // FECHA Y HORA EN ESPAÑOL EN TIEMPO REAL
+    // ==========================================
+    function updateLiveClockSpanish() {
+        const now = new Date();
+        
+        // Formato fecha: ej. "Martes, 3 de noviembre de 2026"
+        const optionsDate = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        let fechaStr = now.toLocaleDateString('es-ES', optionsDate);
+        if (fechaStr) {
+            fechaStr = fechaStr.charAt(0).toUpperCase() + fechaStr.slice(1);
+        }
+        
+        // Formato hora 12h: ej. "12:53:42 P. M."
+        let horaStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+        
+        const dateElem = document.getElementById("headerLiveDate");
+        const timeElem = document.getElementById("headerLiveTime");
+        
+        if (dateElem) dateElem.textContent = fechaStr;
+        if (timeElem) timeElem.textContent = horaStr.toUpperCase();
+    }
+    updateLiveClockSpanish();
+    setInterval(updateLiveClockSpanish, 1000);
+</script>
 </body>
 
 
